@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<h2> Report </h2>
+
+<table style="width:50%;text-align:left;margin-left:100px;margin-bottom:50px;">
+    <tr>
+        <th>Items Purchased</th>
+        <th>Calories Consumed</th>
+        <th>Items Expired</th>
+        <th>Calories Wasted</th>
+    </tr>
+    <tr>
+        <td th:text="${report.nbOfItemsPurchased}"></td>
+        <td th:text="${report.nbOfCaloriesConsumed}"></td>
+        <td th:text="${report.nbOfItemsExpired}"></td>
+        <td th:text="${report.caloriesWasted}"></td>
+    </tr>
+</table>
+
+<h2>Wasted products</h2>
+
+<table style="width:50%;text-align:left;margin-left:100px;margin-bottom:50px;">
+    <thead>
+    <tr>
+        <th>Item name</th>
+        <th>Quantity</th>
+        <th>Calories</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${report.wasted}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.calorieValue}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

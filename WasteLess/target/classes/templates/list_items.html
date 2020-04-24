@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:if="${NullPointerException}">
+    Something went wrong.
+</div>
+<h2>Grocery List Items</h2>
+<h3>Add new grocery item:</h3>
+<!--<div th:switch="${groceryListItems}" class="container my-5">-->
+
+<form th:action="@{/groceryLists-user/{listId}(listId=${listId})}" method="post">
+        <pre>
+        Item name:        <input name="name"/><br/>
+        Quantity:         <input name="quantity"/><br/>
+        Calorie value:    <input name="calorieValue"/><br>
+        Purchase Date:    <input type="date" name="purchaseDate"/><br>
+        Expiration Date:  <input type="date" name="expirationDate"/><br>
+        Consumption Date: <input type="date" name="consumptionDate"/><br>
+        <input type="submit" value="Save">
+            </pre>
+</form>
+<h3>Grocery List Items </h3>
+<table style="width:50%;text-align:left;margin-left:100px;margin-bottom:50px;">
+    <tr>
+        <th>Item id</th>
+        <th>Item name</th>
+        <th>Quantity</th>
+        <th>Calorie value</th>
+        <th>Purchase Date</th>
+        <th>Expiration Date</th>
+        <th>Consumption Date</th>
+    </tr>
+    <tr th:each="item:${groceryListItems}">
+        <td th:text="${item.itemId}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.calorieValue}"></td>
+        <td th:text="${item.purchaseDate}"></td>
+        <td th:text="${item.expirationDate}"></td>
+        <td th:text="${item.consumptionDate}"></td>
+        <td>
+            <form th:action="@{/groceryItem-list/delete/{listId}/{itemId}(itemId=${item.itemId},listId=${item.listId})}"
+                  style="text-align:left" method="post">
+                <input type="submit" value="Donate"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/groceryItem-list/consume/{listId}/{itemId}(itemId=${item.itemId},listId=${item.listId})}"
+                  style="text-align:left" method="post">
+                <input type="submit" value="Eat"/>
+            </form>
+        </td>
+        <td>
+
+        </td>
+    </tr>
+</table>
+</div>
+
+</body>
+</html>
