@@ -1,5 +1,6 @@
 package com.assignment2.wasteless.Presentation.Controller;
 
+import com.assignment2.wasteless.Bussiness.Service.UserService;
 import com.assignment2.wasteless.Data.Repository.ReportGeneratorRepository;
 import com.assignment2.wasteless.Presentation.Model.Report;
 import com.assignment2.wasteless.Presentation.Model.ReportType;
@@ -14,18 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class ReportController {
 
     @Autowired
     private ReportGeneratorRepository reportGeneratorRepository;
 
-    @RequestMapping("/groceryLists-user/reportGenerate")
-    public Report generateReport(@RequestParam(value = "type", required = false) String type, Principal principal) {
+    @RequestMapping("reportGenerate")
+    public Report generateReport(@RequestParam(value = "type", required = false) String type) {
         ReportType reportType = ReportType.valueOf(type.toUpperCase());
-        return reportGeneratorRepository.getReport(reportType, principal.getName());
-//        return "report-view";
+        return reportGeneratorRepository.getReport(reportType, UserService.getLoggedUser().getUsername());
     }
-
-
 }

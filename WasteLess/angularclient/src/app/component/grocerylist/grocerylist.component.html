@@ -77,10 +77,10 @@
     </tr>
   </table>
 
-  <!--<form th:action="@{/groceryLists-user/reportGenerate}" style="text-align:left" method="post">-->
-  <!--  <button type="submit" th:name="type" th:value="weekly">Weekly Report</button>-->
-  <!--  <button type="submit" th:name="type" th:value="monthly">Monthly Report</button>-->
-  <!--</form>-->
+  <form style="text-align:left" method="post">
+    <a class="btn btn-info" [routerLink]="['/reportGenerate']" [queryParams]="{type: 'weekly'}"> Weekly Report</a>
+    <a class="btn btn-info" [routerLink]="['/reportGenerate']" [queryParams]="{type: 'monthly'}"> Monthly Report</a>
+  </form>
 
   <!--<h3>-->
   <!--  <td th:text="${expirationMessage}">-->

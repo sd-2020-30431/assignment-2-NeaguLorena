@@ -38,6 +38,6 @@ public abstract class ReportGenerator {
                 calories += item.getCalorieValue();
             }
         }
-        return new Report(groceryListItems.size(), calories, caloriesWasted, wasted.size(), groceryListItems, consumed, wasted);
+        return new Report(groceryListItems.size(), calories, wasted.size(), caloriesWasted, groceryListItems, consumed, wasted);
     }
 }

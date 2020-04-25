@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHandler, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Goal} from "../model/goal";
-import {ContentType} from "@angular/http/src/enums";
 
 @Injectable()
 export class GoalService {
