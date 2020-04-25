@@ -13,6 +13,7 @@ import {GrocerylistitemService} from "./service/grocerylistitem.service";
 import {GoalService} from "./service/goal.service";
 import { ReportComponent } from './component/report/report.component';
 import {ReportService} from "./service/report.service";
+import {NotificationService} from "./service/notification.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {ReportService} from "./service/report.service";
     HttpClientModule,
     FormsModule
   ],
-  providers: [GrocerylistService, GrocerylistitemService, UserService, GoalService, ReportService],
+  providers: [GrocerylistService, GrocerylistitemService, UserService, GoalService, ReportService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

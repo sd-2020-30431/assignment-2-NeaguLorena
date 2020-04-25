@@ -5,9 +5,7 @@ import com.assignment2.wasteless.Bussiness.Service.ReminderService;
 import com.assignment2.wasteless.Bussiness.Service.UserService;
 import com.assignment2.wasteless.Data.Repository.GoalRepository;
 import com.assignment2.wasteless.Data.Repository.GroceryListRepository;
-import com.assignment2.wasteless.Presentation.Model.Goal;
-import com.assignment2.wasteless.Presentation.Model.GroceryList;
-import com.assignment2.wasteless.Presentation.Model.GroceryListItem;
+import com.assignment2.wasteless.Presentation.Model.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,24 +37,32 @@ public class GroceryListController {
 
     @GetMapping("/groceryLists-user")
     public List<GroceryList> getAllGroceryLists() {
-//        List<Goal> goals = goalRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
+//        List<GroceryListItem> itemsToExpire = notificationService.getItemsAboutToExpire(UserService.getLoggedUser().getUsername());
+//        if (itemsToExpire.size() > 0) {
+//            expirationMessage = "Some items are about to expire tomorrow!";
+//        } else expirationMessage = "";
+        return groceryListRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
+    }
+
+    @GetMapping("/itemsToExpire")
+    public List<GroceryListItem> getItemsAboutToExpire() {
+        return notificationService.getItemsAboutToExpire(UserService.getLoggedUser().getUsername());
+    }
+
+    @GetMapping("/notificationMessage")
+    public String getExpirationNotification() {
+        String expirationMessage;
         List<GroceryListItem> itemsToExpire = notificationService.getItemsAboutToExpire(UserService.getLoggedUser().getUsername());
-//        Goal g = goals.get(goals.size() - 1);
-        String message, expirationMessage;
-//        if (g != null)
-//            message = reminderService.getReminder(UserService.getLoggedUser().getUsername(), g);
-//        else message = "No goal set yet!";
+
+        Notification notification = new Notification();
+        NotificationObserver notificationObserver = new NotificationObserver();
+
+        notification.addPropertyChangeListener(notificationObserver);
         if (itemsToExpire.size() > 0) {
             expirationMessage = "Some items are about to expire tomorrow!";
         } else expirationMessage = "";
+        notification.setExpirationMessage(expirationMessage);
 
-//        model.addAttribute("itemsToExpire", itemsToExpire);
-//        model.addAttribute("expirationMessage", expirationMessage);
-//        model.addAttribute("message", message);
-//        model.addAttribute("goals", goals);
-//        model.addAttribute("groceryLists", groceryListRepository.getAllByUsername(principal.getName()));
-        return groceryListRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
-//        return "grocery_lists";
+        return notificationObserver.getExpirationMessage();
     }
-
 }

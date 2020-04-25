@@ -4,6 +4,8 @@ import {Grocerylist} from "../../model/grocerylist";
 import {GrocerylistService} from "../../service/grocerylist.service";
 import {Goal} from "../../model/goal";
 import {GoalService} from "../../service/goal.service";
+import {Grocerylistitem} from "../../model/grocerylistitem";
+import {NotificationService} from "../../service/notification.service";
 
 @Component({
   selector: 'app-grocerylist',
@@ -17,14 +19,18 @@ export class GrocerylistComponent implements OnInit {
   goals: Goal[];
   goal: Goal;
   reminder: String;
+  itemsToExpire: Grocerylistitem[];
+  notification: String;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private grocerylistService: GrocerylistService,
-              private goalService: GoalService) {
+              private goalService: GoalService,
+              private notificationService: NotificationService) {
     this.grocerylist = new Grocerylist();
     this.goal = new Goal();
     this.reminder = "";
+    this.notification = "";
   }
 
   ngOnInit() {
@@ -37,7 +43,14 @@ export class GrocerylistComponent implements OnInit {
     this.goalService.getReminder().subscribe(data => {
       this.reminder = data
     });
-    this.getReminder();
+    this.getReminderForWasteLevels();
+    this.notificationService.getExpirationNotification().subscribe(data => {
+      this.notification = data;
+    });
+    this.getNotificationForItemExpiration();
+    this.notificationService.getItemsAboutToExpire().subscribe(data => {
+      this.itemsToExpire = data;
+    })
   }
 
   onSubmit() {
@@ -46,10 +59,15 @@ export class GrocerylistComponent implements OnInit {
 
   submitGoal() {
     this.goalService.save(this.goal).subscribe(result => this.goals.push(result));
-    this.getReminder();
+    this.getReminderForWasteLevels();
   }
 
-  getReminder() {
+  getReminderForWasteLevels() {
     this.goalService.getReminder().subscribe(result => this.reminder = result);
   }
+
+  getNotificationForItemExpiration() {
+    this.notificationService.getExpirationNotification().subscribe(result => this.notification = result);
+  }
+
 }

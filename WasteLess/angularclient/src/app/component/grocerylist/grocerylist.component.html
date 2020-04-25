@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <h2>Set Your Goal For Today!</h2>
+<div style="margin-left: 20px">
 <h3>Add new goal:</h3>
 <form (ngSubmit)="submitGoal()" #goalForm="ngForm" style="margin-bottom: 50px">
   <div class="form-group">
@@ -13,7 +14,7 @@
            placeholder="Enter number of calories"
            required #numberOfCaloriesADay="ngModel">
   </div>
-  <!--    <div [hidden]="!numberOfCaloriesADay.pristine" class="alert alert-danger">List name is required</div>-->
+      <div [hidden]="!numberOfCaloriesADay.pristine" class="alert alert-danger">Number of calories is required</div>
   <button type="submit" [disabled]="!goalForm.form.valid"
           class="btn btn-info">Submit
   </button>
@@ -35,7 +36,6 @@
 </table>
 
 <h1>Grocery Lists</h1>
-<div style="margin-left: 20px">
   <h3>Add a new grocery list:</h3>
   <form (ngSubmit)="onSubmit()" #grocerylistForm="ngForm" style="margin-bottom: 50px">
     <div class="form-group">
@@ -53,9 +53,6 @@
     </button>
   </form>
 
-  <h1>
-
-  </h1>
 
   <h3>Your Grocery Lists</h3>
   <table style="width:50%;text-align:left;margin-left:20px;margin-bottom:50px;">
@@ -72,30 +69,30 @@
         </a>
       </td>
       <td>
-
       </td>
     </tr>
   </table>
 
-  <form style="text-align:left" method="post">
+  <form style="text-align:left; margin-bottom: 50px;" method="post">
     <a class="btn btn-info" [routerLink]="['/reportGenerate']" [queryParams]="{type: 'weekly'}"> Weekly Report</a>
     <a class="btn btn-info" [routerLink]="['/reportGenerate']" [queryParams]="{type: 'monthly'}"> Monthly Report</a>
   </form>
+  <h1>
+  </h1>
+  <div class="alertt" style="size : 50px">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h3>
+    <td *ngIf="notification">
+      {{notification}}</td>
+  </h3>
+  </div>
 
-  <!--<h3>-->
-  <!--  <td th:text="${expirationMessage}">-->
-  <!--  </td>-->
-  <!--</h3>-->
-  <!--<table style="width:50%;text-align:left;margin-left:100px;margin-bottom:50px;">-->
-  <!--  <tr th:each="item : ${itemsToExpire}">-->
-  <!--    <td th:text="${itemsToExpire.indexOf(item)+1}"></td>-->
-  <!--    <td th:text="${item.name}"></td>-->
-  <!--  </tr>-->
-  <!--</table>-->
-
-  <!--<form th:action="@{/logout}" method="post">-->
-  <!--  <input type="submit" value="Log Out"/>-->
-  <!--</form>-->
+  <table style="width:50%;text-align:left;margin-left:100px;margin-bottom:50px;">
+    <tr *ngFor="let item of itemsToExpire;">
+      <td>{{itemsToExpire.indexOf(item) + 1}}</td>
+      <td>{{item.name}}</td>
+    </tr>
+  </table>
 </div>
 </body>
 </html>
