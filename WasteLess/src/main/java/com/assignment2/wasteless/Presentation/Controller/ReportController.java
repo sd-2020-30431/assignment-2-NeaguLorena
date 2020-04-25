@@ -23,7 +23,6 @@ public class ReportController {
     @RequestMapping("/groceryLists-user/reportGenerate")
     public Report generateReport(@RequestParam(value = "type", required = false) String type, Principal principal) {
         ReportType reportType = ReportType.valueOf(type.toUpperCase());
-//        model.addAttribute("report", reportGeneratorRepository.getReport(reportType, principal.getName()));
         return reportGeneratorRepository.getReport(reportType, principal.getName());
 //        return "report-view";
     }

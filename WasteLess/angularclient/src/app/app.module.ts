@@ -10,6 +10,7 @@ import {GrocerylistComponent} from './component/grocerylist/grocerylist.componen
 import {GrocerylistService} from "./service/grocerylist.service";
 import {GrocerylistitemComponent} from './component/grocerylistitem/grocerylistitem.component';
 import {GrocerylistitemService} from "./service/grocerylistitem.service";
+import {GoalService} from "./service/goal.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import {GrocerylistitemService} from "./service/grocerylistitem.service";
     HttpClientModule,
     FormsModule
   ],
-  providers: [GrocerylistService, GrocerylistitemService, UserService],
+  providers: [GrocerylistService, GrocerylistitemService, UserService, GoalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

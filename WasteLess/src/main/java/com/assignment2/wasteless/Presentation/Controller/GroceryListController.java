@@ -39,13 +39,13 @@ public class GroceryListController {
 
     @GetMapping("/groceryLists-user")
     public List<GroceryList> getAllGroceryLists() {
-        List<Goal> goals = goalRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
+//        List<Goal> goals = goalRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
         List<GroceryListItem> itemsToExpire = notificationService.getItemsAboutToExpire(UserService.getLoggedUser().getUsername());
-        Goal g = goals.get(goals.size() - 1);
+//        Goal g = goals.get(goals.size() - 1);
         String message, expirationMessage;
-        if (g != null)
-            message = reminderService.getReminder(UserService.getLoggedUser().getUsername(), g);
-        else message = "No goal set yet!";
+//        if (g != null)
+//            message = reminderService.getReminder(UserService.getLoggedUser().getUsername(), g);
+//        else message = "No goal set yet!";
         if (itemsToExpire.size() > 0) {
             expirationMessage = "Some items are about to expire tomorrow!";
         } else expirationMessage = "";

@@ -10,7 +10,6 @@ export class GrocerylistitemService {
   grocerylistitemsUrl: string;
   groceryItemDeleteUrl: string;
 
-
   constructor(private http: HttpClient) {
     this.grocerylistitemsUrl = 'http://localhost:8080/groceryLists-user';
     this.groceryItemDeleteUrl = 'http://localhost:8080/delete'
