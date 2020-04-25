@@ -16,13 +16,15 @@ export class GrocerylistComponent implements OnInit {
   grocerylist: Grocerylist;
   goals: Goal[];
   goal: Goal;
+  reminder: String;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private grocerylistService: GrocerylistService,
-              private goalService : GoalService) {
+              private goalService: GoalService) {
     this.grocerylist = new Grocerylist();
     this.goal = new Goal();
+    this.reminder = "";
   }
 
   ngOnInit() {
@@ -32,13 +34,22 @@ export class GrocerylistComponent implements OnInit {
     this.goalService.findAll().subscribe(data => {
       this.goals = data;
     });
+    this.goalService.getReminder().subscribe(data => {
+      this.reminder = data
+    });
+    this.getReminder();
   }
 
   onSubmit() {
     this.grocerylistService.save(this.grocerylist).subscribe(result => this.grocerylists.push(result));
   }
 
-  submitGoal(){
+  submitGoal() {
     this.goalService.save(this.goal).subscribe(result => this.goals.push(result));
+    this.getReminder();
+  }
+
+  getReminder() {
+    this.goalService.getReminder().subscribe(result => this.reminder = result);
   }
 }

@@ -6,7 +6,6 @@ import com.assignment2.wasteless.Data.Repository.GoalRepository;
 import com.assignment2.wasteless.Presentation.Model.Goal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 

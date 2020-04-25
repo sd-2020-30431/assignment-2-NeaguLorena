@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHandler, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Goal} from "../model/goal";
+import {ContentType} from "@angular/http/src/enums";
 
 @Injectable()
 export class GoalService {
@@ -22,7 +23,7 @@ export class GoalService {
     return this.http.get<Goal[]>(this.goalURL);
   }
 
-  public getReminder() {
-    return this.http.get<String>(this.reminderUrl);
+  public getReminder(): Observable<any> {
+    return this.http.get<String>(this.reminderUrl, {responseType: 'text' as 'json'});
   }
 }
