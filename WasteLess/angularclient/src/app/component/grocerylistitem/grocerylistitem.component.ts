@@ -28,10 +28,13 @@ export class GrocerylistitemComponent implements OnInit {
     this.itemService.save(this.item, this.route.snapshot.paramMap.get("listId")).subscribe(result => this.items.push(result));
   }
 
-  deleteGroceryListItem(groceryItem: Grocerylistitem) {
-    this.itemService.deleteItem(groceryItem).subscribe(result =>
-      this.items.filter(item => item.listId !== groceryItem.listId)
-    );
+  deleteGroceryListItem(itemId: number) {
+    this.items = this.items.filter(item => item.itemId !== itemId);
+    this.itemService.deleteItem(itemId).subscribe();
   }
 
+  updateGroceryListItem(item: Grocerylistitem) {
+    this.items = this.items.filter(i => i.itemId !== item.itemId);
+    this.itemService.consumeItem(item).subscribe(result => this.items.push(result));
+  }
 }

@@ -32,13 +32,13 @@ public class GroceryListItemController {
         return groceryListItemRepository.findAllByListId(listId);
     }
 
-    @RequestMapping("/groceryItem-list/delete/{listId}/{itemId}")
-    public void deleteGroceryListItem(@PathVariable int itemId, @PathVariable int listId) {
+    @DeleteMapping("/delete/{itemId}")
+    public void deleteGroceryListItem(@PathVariable int itemId) {
         groceryListItemRepository.deleteById(itemId);
     }
 
-    @RequestMapping("/groceryItem-list/consume/{listId}/{itemId}")
-    public GroceryListItem consumeGroceryListItem(@PathVariable int itemId, @PathVariable int listId) {
+    @PostMapping("/consume/{itemId}")
+    public GroceryListItem consumeGroceryListItem(@PathVariable int itemId) {
         GroceryListItem oldGroceryListItem = groceryListItemRepository.findItemByItemId(itemId);
         oldGroceryListItem.setConsumptionDate(new Date());
         return groceryListItemRepository.save(oldGroceryListItem);

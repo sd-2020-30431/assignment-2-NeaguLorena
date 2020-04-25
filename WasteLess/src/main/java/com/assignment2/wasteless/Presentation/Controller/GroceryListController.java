@@ -37,10 +37,6 @@ public class GroceryListController {
 
     @GetMapping("/groceryLists-user")
     public List<GroceryList> getAllGroceryLists() {
-//        List<GroceryListItem> itemsToExpire = notificationService.getItemsAboutToExpire(UserService.getLoggedUser().getUsername());
-//        if (itemsToExpire.size() > 0) {
-//            expirationMessage = "Some items are about to expire tomorrow!";
-//        } else expirationMessage = "";
         return groceryListRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
     }
 
