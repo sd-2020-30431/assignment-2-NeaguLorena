@@ -32,7 +32,6 @@ public class GroceryListController {
         groceryList.setUsername(UserService.getLoggedUser().getUsername());
         groceryList.setListId(groceryListRepository.getAllByUsername(username).size() + 1);
         return groceryListRepository.save(groceryList);
-//        return "redirect:/groceryLists-user";
     }
 
     @GetMapping("/groceryLists-user")
